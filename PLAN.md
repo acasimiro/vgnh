@@ -26,7 +26,7 @@ A sequência de tarefas propostas abaixo visa prever possíveis problemas e evit
     - Subir instância atualizada do docker
     - Garantir que e aplicação pode ser testada manualmente
 3. Construção do sistema de coleta `collector` (item 2)
-    - Servlet Java com endpoint `/collect/<hashtag>`
+    - Servlet Java com endpoint `POST /collect/<hashtag>` (usei POST pois o GET tem semântica nulipotente)
     - Funcionamento passivo, disparado ao chamar o endpoint acima
     - Criar app do twitter
 4. Execução da coleta das hashtags indicadas (item 4)
@@ -36,5 +36,8 @@ A sequência de tarefas propostas abaixo visa prever possíveis problemas e evit
     - Funcionamento reativo, executa consolidação conforme novos dados são gravados no banco
 6. Construção da api de relatórios `report-api` (item 6)
     - Node JS
+    - `GET /user/list_top_followed&num=5`
+    - `GET /hashtag/count_tweets&lang=pt`
+    - `GET /tweets/count&granularity=hour`
 7. Construção do sistema de exibição dos resultados `reports` (item 7)
     - Script shell
