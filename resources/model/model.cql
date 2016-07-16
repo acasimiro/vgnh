@@ -17,3 +17,8 @@ create table hashtag_count (
   num int,
   primary key (hour, lang, hashtag)
 );
+
+# Inserts
+insert into hashtag (hour, hashtag, lang, num) values (1468544510, 'lala', 'pt', 10);
+insert into hashtag (hour, hashtag, lang, num) values (1468544511, 'lala', 'pt', 11);
+insert into hashtag (hour, hashtag, lang, num) values (1468544520, 'lala', 'pt', 50);
