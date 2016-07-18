@@ -1,3 +1,5 @@
 .idea/
 collector.iml
 target/
+node_modules/
+resources/spark/
