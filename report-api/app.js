@@ -32,7 +32,7 @@ function groupBy(rows, attr) {
 
 app.get('/hashtag/count_tweets', function (req, res) {
     var lang = req.query.lang || 'pt';
-    var q = "select hashtag, hour, num from hashtag_by_lang where lang = '{l}';".replace("{l}", lang);
+    var q = "select hashtag, hour, num from hashtag_count where lang = '{l}';".replace("{l}", lang);
     client.execute(q, function (err, result) {
         if (err) {
             console.log("err", err);
@@ -44,7 +44,7 @@ app.get('/hashtag/count_tweets', function (req, res) {
 });
 
 app.get('/tweets/count_by_hour', function (req, res) {
-    var q = "select hour, num from hashtag_by_lang;";
+    var q = "select hour, num from hashtag_count;";
     client.execute(q, function (err, result) {
         if (err) {
             console.log("err", err);
