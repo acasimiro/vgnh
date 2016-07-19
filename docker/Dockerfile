@@ -17,10 +17,11 @@ ADD app_files/app.js /opt/report-api
 ADD app_files/package.json /opt/report-api
 ADD files/setup_npm4.sh /tmp
 RUN /tmp/setup_npm4.sh
+RUN apt-get install -y nodejs
+RUN (cd /opt/report-api; npm install)
 
 # create cassandra schema
 ADD files/model.cql /tmp
-#RUN cqlsh -f /tmp/model.cql
 
 # starts report-api
 #RUN (cd /opt/report-api; node app.js &)
