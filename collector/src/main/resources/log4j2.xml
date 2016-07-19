@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Configuration status="DEBUG">
     <Appenders>
-        <File name="CollectorFile" fileName="/tmp/collector/collector.log">
+        <File name="CollectorFile" fileName="/var/log/collector/collector.log">
             <PatternLayout>
                 <Pattern>%d %p %c{1.} [%t] %m%n</Pattern>
             </PatternLayout>

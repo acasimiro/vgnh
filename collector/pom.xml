@@ -4,7 +4,7 @@
     <groupId>br.com.vgnh</groupId>
     <artifactId>collector</artifactId>
     <packaging>jar</packaging>
-    <version>1.0-SNAPSHOT</version>
+    <version>1.0.0</version>
     <name>collector</name>
 
     <dependencies>

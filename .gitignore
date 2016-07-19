@@ -1,4 +1,4 @@
-docker/files/
+docker/app_files/
 target/
 .idea/
 *.iml
