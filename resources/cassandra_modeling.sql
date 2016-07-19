@@ -13,7 +13,7 @@ create table user (
   primary key (dummy_id, num_followers, screen_name)
 ) with clustering order by (num_followers desc);
 
-create table hashtag_by_lang (
+create table hashtag_count (
   lang text,
   hashtag text,
   hour timestamp,

@@ -1,5 +1,5 @@
-.idea/
-collector.iml
+docker/files/
 target/
-node_modules/
-resources/spark/
+.idea/
+*.iml
+report-api/node_modules/

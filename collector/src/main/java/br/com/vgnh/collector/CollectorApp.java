@@ -3,6 +3,7 @@ package br.com.vgnh.collector;
 import ch.qos.logback.core.net.SyslogOutputStream;
 import org.apache.logging.log4j.Logger;
 import org.apache.logging.log4j.LogManager;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.*;
 import org.springframework.boot.autoconfigure.*;
 import org.springframework.web.bind.annotation.*;
@@ -23,6 +24,9 @@ import java.util.Date;
 @RestController
 @EnableAutoConfiguration
 public class CollectorApp {
+
+    @Value("${outputFolder}")
+    private String outputFolder;
 
     private static final Logger logger = LogManager.getLogger(CollectorApp.class);
     private Twitter twitter = TwitterFactory.getSingleton();
@@ -77,7 +81,7 @@ public class CollectorApp {
         } catch (UnknownHostException e) {
             host = "unknown";
         }
-        path = String.format("/tmp/collector/data/tweets-%s-%s.json", host, time);
+        path = String.format(outputFolder + "/tweets-%s-%s.json", host, time);
         File file = new File(path);
         BufferedWriter bw = null;
         try {
