@@ -17,6 +17,7 @@ create table hashtag_count (
   lang text,
   hashtag text,
   hour timestamp,
+  rand int,
   num int,
   primary key (lang, hashtag, hour)
 );

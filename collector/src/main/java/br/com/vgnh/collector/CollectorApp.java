@@ -43,14 +43,13 @@ public class CollectorApp {
         BufferedWriter writer = getFileWriter();
 
         for (Status status : queryResult.getTweets()) {
-            JSONObject obj = new JSONObject();
-            obj.put("id", status.getId());
-            obj.put("username", status.getUser().getScreenName());
-            obj.put("num_followers", status.getUser().getFollowersCount());
-            obj.put("lang", status.getLang());
-            obj.put("hashtag", status.getLang());
-            obj.put("timestamp", status.getCreatedAt().getTime());
-            writer.write(obj.toJSONString() + "\n");
+            String s = "" + status.getId();
+            s += "|" + status.getUser().getScreenName();
+            s += "|" + status.getUser().getFollowersCount();
+            s += "|" + status.getLang();
+            s += "|" + hashtag;
+            s += "|" + status.getCreatedAt().getTime();
+            writer.write(s + "\n");
         }
         writer.close();
         logger.info(String.format("Fim da coleta para hashtag '%s'", hashtag));

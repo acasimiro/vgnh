@@ -43,9 +43,11 @@
 
 ## Diagrama de arquitetura
 
+ - A transferência dos arquivos do
 
 ## Modelagem da base de dados
 
+ - Explicar rand
 
 ## Diagrama de implantação
 
@@ -64,10 +66,10 @@
 
 ## Considerações adicionais
 
+ - Apesar de ter muito mais conhecimento em Python escolhi Scala para a contrução do `consolidator` pois já tive problemas com APIs não portadas do spark (scala) para o pyspark, então quis evitar surpresas e consequente possível retrabalho.
  - Cassandra parece não ser uma boa ideia para a consulta de TOP 5 usuários com seguidores devido a limitações da cláusula para colunas fora da chave. Em meu entendimento a duas soluções viáveis:
     1. Usar uma chave primária "dummy" e aproveitar a ordenação das colunas secundárias da chave. Escolhi essa solução por ser mais simples, mas ela sofreria do problema de desbalanceamento de carga dos nós do cluster Cassandra.
     2. Usar N chaves, uma para cada nó do cluster, mas isso exigiria executar N consultas.
- - Apesar de ter maior conhecimento em Python escolhi Scala pois já tive problemas com APIs não portadas do spark original, então quis evitar surpresas e possível retrabalho.
 
 
 ## Docker

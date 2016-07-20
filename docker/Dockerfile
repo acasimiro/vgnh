@@ -8,7 +8,7 @@ RUN mkdir -p /tmp/collector/data
 RUN update-ca-certificates -f
 # consolidator
 ADD app_files/spark-1.6.0-bin-hadoop2.6.tgz /opt/consolidator
-RUN ln -s /opt/consolidator/spark-1.6.0-bin-hadoop2.6.tgz /opt/consolidator/spark
+RUN ln -s /opt/consolidator/spark-1.6.0-bin-hadoop2.6 /opt/consolidator/spark
 # report-api
 ADD files/setup_npm4.sh /tmp
 RUN /tmp/setup_npm4.sh

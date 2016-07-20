@@ -15,15 +15,17 @@ object ConsolidatorApp {
 
   val cassandraHost = "127.0.0.1"
   val checkpointDirectory: String = "/tmp/spark-checkpoint-dir"
-  val tweetLogsFolder: String = "/tmp/collector/data"
 
   case class TweetInfo (tweetId:Long, screenName:String, numFollowers:Int, lang:String, hashtag:String, timestamp:Long)
 
   def main(args : Array[String]) {
+    val tweetLogsFolder = args(0)
+    val batchInterval = args(1).toInt
+
     def functionToCreateContext(): StreamingContext = {
       val conf = new SparkConf().setAppName("ConsolidatorApp")
         .set("spark.cassandra.connection.host", cassandraHost)
-      val ssc = new StreamingContext(conf, Seconds(5))
+      val ssc = new StreamingContext(conf, Seconds(batchInterval))
 
       val textStream:DStream[String] = ssc.fileStream[LongWritable, Text, TextInputFormat](
       tweetLogsFolder, (p:Path) => true, newFilesOnly=false).map(_._2.toString)
@@ -31,7 +33,6 @@ object ConsolidatorApp {
         val l = t.split('|')
         TweetInfo(l(0).toLong, l(1), l(2).toInt, l(3), l(4), l(5).toLong)
       })
-      tweetInfoStream.print()
       UserWorkflow.configure(tweetInfoStream)
       HashtagWorkflow.configure(tweetInfoStream)
 
