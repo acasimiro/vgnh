@@ -1,5 +1,4 @@
 -- Model
-drop keyspace vgnh;
 create keyspace vgnh
   with replication = {'class': 'SimpleStrategy', 'replication_factor': '1'}
   and durable_writes = true;

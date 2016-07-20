@@ -1,6 +1,6 @@
 var express = require('express');
 var cassandra = require('cassandra-driver');
-var client = new cassandra.Client({contactPoints: ['172.17.0.3'], keyspace: 'vgnh'});
+var client = new cassandra.Client({contactPoints: ['127.0.0.1'], keyspace: 'vgnh'});
 
 var app = express();
 app.set('json spaces', 2);
