@@ -1,7 +1,8 @@
 #!/bin/bash
 
 if [ ! -f app_files/spark-1.6.0-bin-hadoop2.6.tgz ]; then
-    (cd app_files; wget http://archive.apache.org/dist/spark/spark-1.6.0/spark-1.6.0-bin-hadoop2.6.tgz)
+    wget http://archive.apache.org/dist/spark/spark-1.6.0/spark-1.6.0-bin-hadoop2.6.tgz
+    mv spark-1.6.0-bin-hadoop2.6.tgz app_files
 fi
 
 if [ ! -f app_files/collector-*.jar ]; then
