@@ -6,6 +6,7 @@
 ## Repositórios
 
 **Repositório Github:** <https://github.com/acasimiro/vgnh>
+
 **Imagem Docker:** <https://hub.docker.com/r/acasimiro/vgnh/>
 
 
@@ -47,15 +48,40 @@
 
 
 ## Diagrama de arquitetura
+![arquitetura](architecture.png)
 
- - A transferência dos arquivos do
+###### Fluxo
+1. `collector` recebe requisição de coleta de tweets para uma hashtag
+2. `collector` busca tweets no twitter
+3. `collector` escreve arquivo com tweets recuperados no NFS
+4. A cada X segundos o `consolidator` detecta novos arquivos no NFS e inicia processamento
+5. Consolidação em dois fluxos, um para a tabela `user` e outro para `hashtag_count`
+6. `report-api` recebe requisição de consulta
+7. Faz consulta no cassandra
+8. Devolve resposta para o usuário
+
+**OBS:** Apesar de ter muito mais conhecimento em Python escolhi Scala para a contrução do `consolidator` pois já tive problemas com APIs não portadas do spark (scala) para o pyspark, então quis evitar surpresas e consequente possível retrabalho.
 
 ## Modelagem da base de dados
+![database](database.png)
 
- - Explicar rand
+**OBS:** Cassandra parece não ser uma boa ideia para a consulta de TOP 5 usuários com seguidores devido a limitações da cláusula para colunas fora da chave. Em meu entendimento a duas soluções viáveis:
+
+1. Usar uma chave primária "dummy" e aproveitar a ordenação das colunas secundárias da chave. Escolhi essa solução por ser mais simples, mas ela sofreria do problema de desbalanceamento de carga dos nós do cluster Cassandra.
+2. Usar N chaves, uma para cada nó do cluster, mas isso exigiria executar N consultas.
 
 ## Diagrama de implantação
+![DAP](DAP.png)
 
+###### Perfil das máquinas
+ - `vgnh-collector`: RAM: 8~16Gb, Disco: 100~200Gb
+ - `vgnh-consolidator`: RAM: 8~16Gb, Disco: 100~200Gb
+ - `vgnh-cassandra`: RAM: 16~32Gb, Disco: 1Tb
+ - `vgnh-report-api`: RAM: 2~4Gb, Disco: 20Gb
+
+###### Comentários
+ - Componentes construídos em forma de micro-serviços, possibilitando dimensionamento individual
+ - Portas listadas para liberação de ACLs
 
 ## Referências utilizadas
  - **Livros**
@@ -67,17 +93,3 @@
  - **Artigos**
     - [Getting Started · Building an Application with Spring Boot](https://spring.io/guides/gs/spring-boot/)
     - [Getting Started with Apache Spark and Cassandra - DataStax Academy](https://academy.datastax.com/resources/getting-started-apache-spark-and-cassandra)
-
-
-## Considerações adicionais
-
- - Apesar de ter muito mais conhecimento em Python escolhi Scala para a contrução do `consolidator` pois já tive problemas com APIs não portadas do spark (scala) para o pyspark, então quis evitar surpresas e consequente possível retrabalho.
- - Cassandra parece não ser uma boa ideia para a consulta de TOP 5 usuários com seguidores devido a limitações da cláusula para colunas fora da chave. Em meu entendimento a duas soluções viáveis:
-    1. Usar uma chave primária "dummy" e aproveitar a ordenação das colunas secundárias da chave. Escolhi essa solução por ser mais simples, mas ela sofreria do problema de desbalanceamento de carga dos nós do cluster Cassandra.
-    2. Usar N chaves, uma para cada nó do cluster, mas isso exigiria executar N consultas.
-
-
-## Docker
-
-Foi criada uma imagem docker da solução proposta e disponibilizada na seguinte URL
-<http://hub.docker.com>

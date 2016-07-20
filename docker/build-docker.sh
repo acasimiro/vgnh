@@ -1,5 +1,10 @@
 #!/bin/bash
 
+if [ "`id -u 2>/dev/null`" != "0" ] ; then
+    echo "You must be root."
+    exit 1
+fi
+
 mkdir -p app_files
 
 if [ ! -f app_files/spark-1.6.0-bin-hadoop2.6.tgz ]; then

@@ -6,7 +6,7 @@
 O plano de trabalho (item 1) pode ser encontrado no arquivo [docs/PLAN.md](docs/PLAN.md)
 
 ## Relatório Técnico
-O relatório técnico (item 8) pode ser encontrado no arquivo [docs/REPORT.md](docs/PLAN.md)
+O relatório técnico (item 8) pode ser encontrado no arquivo [docs/REPORT.md](docs/REPORT.md)
 
 ## Para construir a imagem docker
 
