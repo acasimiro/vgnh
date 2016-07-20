@@ -30,14 +30,14 @@ insert into user (dummy_id, screen_name, num_followers) values (1, 'zo', 3);
 insert into user (dummy_id, screen_name, num_followers) values (1, 'zu', 4);
 insert into user (dummy_id, screen_name, num_followers) values (1, 'xx', 1);
 
-insert into hashtag_by_lang (lang, hashtag, hour, num) values ('pt', 'lala', '2016-07-17 20:00', 10);
-insert into hashtag_by_lang (lang, hashtag, hour, num) values ('en', 'lala', '2016-07-17 21:00', 11);
-insert into hashtag_by_lang (lang, hashtag, hour, num) values ('pt', 'lala', '2016-07-17 22:00', 50);
-insert into hashtag_by_lang (lang, hashtag, hour, num) values ('pt', 'lele', '2016-07-17 20:00', 10);
-insert into hashtag_by_lang (lang, hashtag, hour, num) values ('en', 'lele', '2016-07-17 21:00', 11);
-insert into hashtag_by_lang (lang, hashtag, hour, num) values ('pt', 'lele', '2016-07-17 22:00', 50);
+insert into hashtag_count (lang, hashtag, hour, num) values ('pt', 'lala', '2016-07-17 20:00', 10);
+insert into hashtag_count (lang, hashtag, hour, num) values ('en', 'lala', '2016-07-17 21:00', 11);
+insert into hashtag_count (lang, hashtag, hour, num) values ('pt', 'lala', '2016-07-17 22:00', 50);
+insert into hashtag_count (lang, hashtag, hour, num) values ('pt', 'lele', '2016-07-17 20:00', 10);
+insert into hashtag_count (lang, hashtag, hour, num) values ('en', 'lele', '2016-07-17 21:00', 11);
+insert into hashtag_count (lang, hashtag, hour, num) values ('pt', 'lele', '2016-07-17 22:00', 50);
 
 -- Queries
 select screen_name, num_followers from user where dummy_id = 1 order by num_followers desc limit 5;
-select hashtag, hour, num from hashtag_by_lang where lang = 'pt';
-select hour, num from hashtag_by_lang;
+select hashtag, hour, num from hashtag_count where lang = 'pt';
+select hour, rand, num from hashtag_count;

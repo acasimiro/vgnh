@@ -1,8 +1,9 @@
 #!/bin/bash
 
+mkdir -p app_files
+
 if [ ! -f app_files/spark-1.6.0-bin-hadoop2.6.tgz ]; then
-    wget http://archive.apache.org/dist/spark/spark-1.6.0/spark-1.6.0-bin-hadoop2.6.tgz
-    mv spark-1.6.0-bin-hadoop2.6.tgz app_files
+    (cd app_files; wget http://archive.apache.org/dist/spark/spark-1.6.0/spark-1.6.0-bin-hadoop2.6.tgz)
 fi
 
 if [ ! -f app_files/collector-*.jar ]; then
@@ -20,4 +21,4 @@ if [ ! -f app_files/app.js ]; then
     cp ../report-api/package.json app_files
 fi
 
-sudo docker build -t vgnh .
+sudo docker build -t acasimiro/vgnh .
