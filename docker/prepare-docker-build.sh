@@ -1,10 +1,5 @@
 #!/bin/bash
 
-if [ "`id -u 2>/dev/null`" != "0" ] ; then
-    echo "You must be root."
-    exit 1
-fi
-
 mkdir -p app_files
 
 if [ ! -f app_files/spark-1.6.0-bin-hadoop2.6.tgz ]; then
@@ -25,5 +20,3 @@ if [ ! -f app_files/app.js ]; then
     cp ../report-api/app.js app_files
     cp ../report-api/package.json app_files
 fi
-
-sudo docker build -t acasimiro/vgnh .
