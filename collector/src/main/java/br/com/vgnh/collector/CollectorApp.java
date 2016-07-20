@@ -32,7 +32,7 @@ public class CollectorApp {
 
     @RequestMapping(value = "/collect", method = RequestMethod.POST)
     @ResponseBody
-    String collect(@RequestBody String hashtag) throws IOException, TwitterException {
+    String collect(@RequestParam String hashtag) throws IOException, TwitterException {
 
         logger.info(String.format("Inicio da coleta para hashtag '%s'", hashtag));
         if (hashtag.startsWith("#")) {
